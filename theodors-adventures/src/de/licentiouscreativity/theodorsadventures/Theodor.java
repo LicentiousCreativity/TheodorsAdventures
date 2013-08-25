@@ -93,7 +93,7 @@ public class Theodor extends Entity{
 	private void addIngredientMovement(String movement, int distance) {
 		if (ingFilled) {
 			for (Ingredient ingredient : ingredients) {
-				System.out.println(posX + ":" + posY + "-" + movement);
+				System.out.println("-theodor-" + posX + ":" + posY + "-" + movement);
 				ingredient.addMovement(posX, posY, distance, movement);
 				
 			}
