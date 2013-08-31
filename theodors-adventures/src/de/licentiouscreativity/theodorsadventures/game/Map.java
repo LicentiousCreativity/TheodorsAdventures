@@ -1,4 +1,4 @@
-package de.licentiouscreativity.theodorsadventures;
+package de.licentiouscreativity.theodorsadventures.game;
 
 public class Map {
 
