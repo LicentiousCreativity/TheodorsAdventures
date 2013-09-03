@@ -60,19 +60,22 @@ public class GameScreen extends AbstractScreen{
 	public void render(final float delta) {
 		super.render(delta);
 		
-		update(delta);
-		
-		batch.begin();
 		if (gameState == GameState.Play)
 		{
-			buttonMoveLeft.render(batch);
-			buttonMoveRight.render(batch);
-			buttonJump.render(batch);
-			buttonPause.render(batch);
-			
-			map.render();
-			theodor.render();
+			update(delta);
 		}
+		//update(delta);
+		
+		batch.begin();
+		
+		buttonMoveLeft.render(batch);
+		buttonMoveRight.render(batch);
+		buttonJump.render(batch);
+		buttonPause.render(batch);
+		
+		map.render();
+		theodor.render();
+			
 		else if (gameState == GameState.Pause)
 		{
 			Gdx.gl.glClearColor(0, 0, 0, 1f);
