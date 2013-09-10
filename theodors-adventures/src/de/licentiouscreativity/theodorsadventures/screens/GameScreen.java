@@ -59,23 +59,23 @@ public class GameScreen extends AbstractScreen{
 	@Override
 	public void render(final float delta) {
 		super.render(delta);
-		
-		update(delta);
-		
-		batch.begin();
 		if (gameState == GameState.Play)
 		{
-			buttonMoveLeft.render(batch);
-			buttonMoveRight.render(batch);
-			buttonJump.render(batch);
-			buttonPause.render(batch);
-			
-			map.render();
-			theodor.render();
+			update(delta);
 		}
-		else if (gameState == GameState.Pause)
+		batch.begin();
+		
+		buttonMoveLeft.render(batch);
+		buttonMoveRight.render(batch);
+		buttonJump.render(batch);
+		buttonPause.render(batch);
+		
+		map.render();
+		theodor.render();
+
+		if (gameState == GameState.Pause)
 		{
-			Gdx.gl.glClearColor(0, 0, 0, 1f);
+			Gdx.gl.glClearColor(255, 0, 255, 0f);
 		    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 			buttonResume.render(batch);
 			buttonExit.render(batch);

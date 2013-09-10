@@ -13,6 +13,7 @@ public class Input implements InputProcessor{
 
 	private final float screenWidth, screenHeight;
 	
+	
 	public Input(final Theodor theodor, final Button buttonMoveRight, final Button buttonMoveLeft, final Button buttonJump, final Button buttonPause, final Button buttonResume) {
 		this.theodor = theodor;
 		this.buttonMoveRight = buttonMoveRight;

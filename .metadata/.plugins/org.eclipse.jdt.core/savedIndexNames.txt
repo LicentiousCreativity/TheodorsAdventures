@@ -1,0 +1,26 @@
+INDEX VERSION 1.126+C:\Users\Lukas\Documents\GitHub\TheodorsAdventures\.metadata\.plugins\org.eclipse.jdt.core
+4155206848.index
+3076860822.index
+3974580528.index
+3873131204.index
+30765161.index
+1995173708.index
+1498219845.index
+1386663773.index
+4180061085.index
+3583013720.index
+305854171.index
+1115467115.index
+3133528496.index
+473232152.index
+3065916431.index
+579878427.index
+1697886153.index
+163172794.index
+1187633580.index
+4041092966.index
+1706306266.index
+2190489354.index
+1177442238.index
+4108727661.index
+1299022128.index
