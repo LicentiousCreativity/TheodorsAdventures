@@ -11,7 +11,8 @@ public class Entity {
 
 	protected final SpriteBatch batch;
 	
-	protected int posX, posY, dirX, dirY, moveSpeed, jumpSpeed;
+	protected int moveSpeed, jumpSpeed;
+	protected float posX, posY, dirX, dirY;
 	protected boolean jumping, moveRight, moveLeft;
 	protected final Rectangle bounceHead, bounceBody;
 	
