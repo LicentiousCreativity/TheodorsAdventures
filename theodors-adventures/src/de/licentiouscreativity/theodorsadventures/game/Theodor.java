@@ -21,6 +21,8 @@ public class Theodor extends Entity{
 		
 		ingredients = new ArrayList<Ingredient>();
 		ingredients.add(new Ingredient(posX, posY, moveSpeed, jumpSpeed, DISTANCE, 1, bounceHead, bounceBody, walkSheetName, batch));
+		ingredients.add(new Ingredient(posX, posY, moveSpeed, jumpSpeed, DISTANCE, 2, bounceHead, bounceBody, walkSheetName, batch));
+
 	}
 	
 	@Override
@@ -35,7 +37,7 @@ public class Theodor extends Entity{
 		
 		//update ingredients
 		for (Ingredient ingredient : ingredients) {
-			ingredient.update(delta);
+			ingredient.update(delta, posX);
 		}
 		
 		//move map
@@ -50,4 +52,51 @@ public class Theodor extends Entity{
 			ingredient.render();
 		}
 	}	
+	
+	@Override
+	public void moveRight() {
+		super.moveRight();
+		
+		addIngredientMovement("right", 0);
+	}
+	
+	@Override
+	public void moveLeft() {
+		super.moveLeft();
+		
+		addIngredientMovement("left", 0);
+	}
+	
+	@Override
+	public void jump() {
+		super.jump();
+		
+		addIngredientMovement("jump", 0);
+	}
+	
+	@Override
+	public void stopMove() {
+		super.stopMove();
+		
+		int distance = 0;
+		
+		if (ingFilled) {
+			if (ingredients.get(0).isMoveRight()) {
+				distance = -DISTANCE + 1;
+			} else if (ingredients.get(0).isMoveLeft()) {
+				distance = DISTANCE - 1;
+			}
+		}
+		addIngredientMovement("stop", distance);
+	}
+	
+	private void addIngredientMovement(final String movement, final float distance) {
+		if (ingFilled) {
+			for (Ingredient ingredient : ingredients) {
+				ingredient.addMovement(posX, posY, distance, movement);	
+				//System.out.println("put " + movement + " - " + (posX+distance));
+
+			}
+		}	
+	}
 }

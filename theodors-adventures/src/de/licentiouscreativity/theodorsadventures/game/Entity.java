@@ -127,7 +127,7 @@ public class Entity {
 	}
 	
 	public boolean isMoving() {
-		if (moveLeft == true && moveRight == true) {
+		if (moveLeft == true || moveRight == true) {
 			return true;
 		}
 		
