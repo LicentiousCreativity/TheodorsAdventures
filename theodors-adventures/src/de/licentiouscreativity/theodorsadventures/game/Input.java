@@ -4,17 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
+import de.licentiouscreativity.theodorsadventures.screens.AbstractScreen;
 import de.licentiouscreativity.theodorsadventures.screens.GameScreen;
+import de.licentiouscreativity.theodorsadventures.screens.GameScreen.GameState;
 
 public class Input implements InputProcessor{
 	
+	private final GameScreen screen;
 	private final Theodor theodor;
 	private final Button buttonMoveRight, buttonMoveLeft, buttonJump, buttonPause, buttonResume;
 
 	private final float screenWidth, screenHeight;
 	
 	
-	public Input(final Theodor theodor, final Button buttonMoveRight, final Button buttonMoveLeft, final Button buttonJump, final Button buttonPause, final Button buttonResume) {
+	public Input(final GameScreen screen, final Theodor theodor, final Button buttonMoveRight, final Button buttonMoveLeft, final Button buttonJump, final Button buttonPause, final Button buttonResume) {
+		this.screen = screen;
 		this.theodor = theodor;
 		this.buttonMoveRight = buttonMoveRight;
 		this.buttonMoveLeft = buttonMoveLeft;
@@ -47,14 +51,12 @@ public class Input implements InputProcessor{
 		//activate pausemenu on a desktop
 		if (keycode == Keys.ESCAPE) {
 			System.out.println("Button Escape was pressed!");
-			if (GameScreen.returnGameState() == 1)
-				GameScreen.pauseGame();
-			else if (GameScreen.returnGameState() == 2)
-				GameScreen.resumeGame();
-			else if (GameScreen.returnGameState() == 3)
-			{
-				//do the following
-			}
+			if (screen.returnGameState() == GameState.Play)
+				screen.pause();
+			else if (screen.returnGameState() == GameState.Pause)
+				screen.resume();
+			
+			return true;
 		}
 		
 		return false;
@@ -112,17 +114,19 @@ public class Input implements InputProcessor{
 			return true;
 		}
 		
-		//activate the pausemenu within the game on an android device
+		//buttonPause
 		if (buttonPause.touchDown(x, y, pointer)) {
 			System.out.println("pause-button was touched!");
-			GameScreen.pauseGame();
+			screen.pause();
+			return true;
 		}
 		
-		//resume to game
+		//buttonResume
 		if (buttonResume.touchDown(x, y, pointer))
 		{
 			System.out.println("resume-button was touched!");
-			GameScreen.resumeGame();
+			screen.resume();
+			return true;
 		}
 		
 		return false;

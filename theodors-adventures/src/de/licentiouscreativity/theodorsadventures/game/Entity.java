@@ -52,10 +52,10 @@ public class Entity {
 		posY += dirY * delta;
 		
 		if (jumping) {
-			dirY += 10;
+			dirY -= 10;
 			
 			//TODO set ground
-			if (posY >= 200) {
+			if (posY <= 200) {
 				posY = 200;
 				dirY = 0;
 				jumping = false;

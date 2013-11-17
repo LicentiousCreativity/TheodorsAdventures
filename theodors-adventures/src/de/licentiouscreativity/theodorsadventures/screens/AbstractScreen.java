@@ -19,7 +19,7 @@ public abstract class AbstractScreen implements Screen {
 		this.game = game;
 		
         camera = new OrthographicCamera();
-        camera.setToOrtho(true, 800, 480);
+        camera.setToOrtho(false, 800, 480);
         batch = new SpriteBatch();
 	}
 

@@ -16,7 +16,7 @@ public class GameScreen extends AbstractScreen{
 
 	private final BitmapFontCache font;
 	
-	private enum GameState {
+	public enum GameState {
 		Play, Pause, GameOver;
 	}
 	
@@ -34,20 +34,19 @@ public class GameScreen extends AbstractScreen{
 		font = new BitmapFontCache(new BitmapFont());
 		
 		// Gameplay buttons
-		
-		buttonMoveRight = new Button("data/button.png", "data/button.png", 200f, 350f);
-		buttonMoveLeft = new Button("data/button.png", "data/button.png", 50f, 350f);
-		buttonJump = new Button("data/button.png", "data/button.png", 600f, 350f);
-		buttonPause = new Button("data/pause.png", "data/pause.png", 0f, 0f);
+		buttonMoveRight = new Button("data/button.png", "data/button.png", 200f, 20f);
+		buttonMoveLeft = new Button("data/button.png", "data/button.png", 50f, 20f);
+		buttonJump = new Button("data/button.png", "data/button.png", 600f, 20f);
+		buttonPause = new Button("data/pause.png", "data/pause.png", 0f, 445f, true);
 		
 		// Pausescreen buttons
-		buttonResume = new Button("data/play.png", "data/play.png", 0f, 0f);
+		buttonResume = new Button("data/play.png", "data/play.png", 0f, 445f, false);
 		buttonExit = new Button("data/exit.png", "data/exit.png", 350f, 220f);
 		
 		map = new Map();
-		theodor = new Theodor(150, 200, 80, -400, new Rectangle(), new Rectangle(), "data/character/tests/kreis.png", batch); //TODO add walkSheetName
+		theodor = new Theodor(150, 200, 80, 400, new Rectangle(), new Rectangle(), "data/character/tests/kreis.png", batch); //TODO add walkSheetName
 		
-		Gdx.input.setInputProcessor(new Input(theodor, buttonMoveRight, buttonMoveLeft, buttonJump, buttonPause, buttonResume));
+		Gdx.input.setInputProcessor(new Input(this, theodor, buttonMoveRight, buttonMoveLeft, buttonJump, buttonPause, buttonResume));
 	}
 
 	
@@ -73,10 +72,8 @@ public class GameScreen extends AbstractScreen{
 		
 		map.render();
 		theodor.render();
-
+		
 		if (gameState == GameState.Pause) {
-			
-		} else if (gameState == GameState.Pause) {
 			Gdx.gl.glClearColor(255, 0, 255, 0f);
 		    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 			buttonResume.render(batch);
@@ -105,26 +102,16 @@ public class GameScreen extends AbstractScreen{
 	public void pause() {
 		super.pause();
 		gameState = GameState.Pause;
-	}
-	
-	// pause game on pc's
-	public static void pauseGame()
-	{
-		gameState = GameState.Pause;
-		System.out.println("Game stopped!");
+		buttonPause.setTouchAble(false);
+		buttonResume.setTouchAble(true);
 	}
 	
 	@Override
 	public void resume() {
 		super.resume();
 		gameState = GameState.Play;
-	}
-	
-	// resume to game on pc's
-	public static void resumeGame()
-	{
-		gameState = GameState.Play;
-		System.out.println("Resume to game!");
+		buttonPause.setTouchAble(true);
+		buttonResume.setTouchAble(false);
 	}
 	
 	@Override
@@ -134,29 +121,8 @@ public class GameScreen extends AbstractScreen{
 		batch.dispose();
 	}
 	
-	/*
-	 * return current gameState value as int:
-	 * 1 = Play
-	 * 2 = Pause
-	 * 3 = GameOver
-	 */
-	public static int returnGameState()
+	public GameState returnGameState()
 	{
-		int gameStateValue = 1;
-		
-		if (gameState == GameState.Play)
-		{
-			gameStateValue=1;
-		}
-		else if (gameState == GameState.Pause)
-		{
-			gameStateValue=2;
-		}
-		else if (gameState == GameState.GameOver)
-		{
-			gameStateValue=3;
-		}
-		
-		return gameStateValue;
+		return gameState;
 	}
 }
